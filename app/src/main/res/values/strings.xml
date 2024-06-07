@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Weather_App_Project</string>
+    <string name="temperature_format">%d°C</string>
+    <string name="wind_format">%.1f km/h</string>
+    <string name="percent">%d%%</string>
+    <string name="rain_format">%.1f mm</string>
+</resources>

@@ -1,0 +1,22 @@
+package com.example.weather_app_project.viewmodels
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.weather_app_project.network.api.ApiResponse
+import com.example.weather_app_project.objects.response.fivedays.FiveDays
+import com.example.weather_app_project.repositories.FiveDaysRepository
+import kotlinx.coroutines.launch
+
+class FiveDaysViewModel(application: Application, private val fivesDaysRepository: FiveDaysRepository):
+    AndroidViewModel(application) {
+    val fiveDaysData = MutableLiveData<ApiResponse<FiveDays>>()
+    fun getFiveDays(){
+        fiveDaysData.value = ApiResponse.Loading()
+        viewModelScope.launch {
+            val response = fivesDaysRepository.getFiveDays()
+            fiveDaysData.value = response
+        }
+    }
+}

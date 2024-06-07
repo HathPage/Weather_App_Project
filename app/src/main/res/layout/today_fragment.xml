@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp">
+
+            <ImageButton
+                android:id="@+id/btn_location"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:background="@drawable/map"
+                android:contentDescription="Location" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:fontFamily="@font/font"
+                android:textStyle="bold"
+                android:text="Hanoi" />
+
+            <ImageButton
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:background="@drawable/dropdown"
+                android:contentDescription="Location" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/location"
+            android:background="@drawable/notify_icon" />
+        <ImageView
+            android:id="@+id/img_main"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_130sdp"
+            android:src="@drawable/sun_and_little_clouds"
+            android:text="abc"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_22sdp"
+            android:layout_below="@+id/location"
+            />
+        <TextView
+            android:id="@+id/tv_main_wt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_22sdp"
+            android:layout_below="@+id/location"
+            />
+        <TextView
+            android:id="@+id/tempTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/_40sdp"
+            android:textStyle="bold"
+            android:layout_below="@+id/img_main"
+            />
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:fontFamily="@font/font"
+            android:gravity="center"
+            android:text="Precipitations"
+            android:layout_below="@+id/tempTextView"
+            />
+
+        <RelativeLayout
+            android:id="@+id/tv_feel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_below="@+id/tv_description"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_feel_like_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/font"
+                android:text="Feels like: "
+                android:layout_alignParentBottom="true" />
+
+            <TextView
+                android:id="@+id/tv_feel_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/font"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/tv_feel_like_txt" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/first_board"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:gravity="center"
+            android:background="@drawable/board_day_background"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_below="@+id/tv_feel">
+
+            <ImageView
+                android:id="@+id/iv_rain_icon"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/noun_rain" />
+
+            <TextView
+                android:id="@+id/tv_rain_1h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19"
+                android:textStyle="bold"
+                android:fontFamily="@font/font"
+                android:textColor="@color/white"
+                android:layout_toEndOf="@+id/iv_rain_icon" />
+
+
+            <ImageView
+                android:id="@+id/iv_humidity_icon"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/noun_humidity"
+                android:layout_toEndOf="@+id/tv_rain_1h"
+                android:layout_marginStart="@dimen/_35sdp"
+                android:contentDescription="Humidity" />
+
+            <TextView
+                android:id="@+id/tv_humidity_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="46"
+                android:textStyle="bold"
+                android:fontFamily="@font/font"
+                android:textColor="@color/white"
+                android:layout_toEndOf="@+id/iv_humidity_icon" />
+
+            <ImageView
+                android:id="@+id/iv_wind_icon"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/noun_wind"
+                android:layout_toEndOf="@+id/tv_humidity_percent"
+                android:layout_marginStart="@dimen/_35sdp"
+                android:contentDescription="Wind speed" />
+
+            <TextView
+                android:id="@+id/tv_wind_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26"
+                android:textStyle="bold"
+                android:fontFamily="@font/font"
+                android:textColor="@color/white"
+                android:layout_toEndOf="@+id/iv_wind_icon" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>
