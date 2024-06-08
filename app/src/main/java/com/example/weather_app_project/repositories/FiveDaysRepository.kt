@@ -6,7 +6,7 @@ import com.example.weather_app_project.network.api.RetrofitClient
 import com.example.weather_app_project.objects.response.fivedays.FiveDays
 
 class FiveDaysRepository: GenericApiResponse() {
-    suspend fun getFiveDays(): ApiResponse<FiveDays> {
-        return apiCall { RetrofitClient.getDummyApi.getFiveDay() }
+    suspend fun getFiveDays(location: String): ApiResponse<FiveDays> {
+        return apiCall { RetrofitClient.getDummyApi.getFiveDay(location) }
     }
 }

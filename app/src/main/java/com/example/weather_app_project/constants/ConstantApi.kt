@@ -8,6 +8,4 @@ object ConstantApi {
     const val USER_LOCATION = "weather?lat=44.34&lon=10.99&appid=6a8559e8dbeced0b31faf839c14b3c9d"
     const val DEFAULT = "Tinh Hung Yen"
 
-    fun getWeatherUrl(location: String) = "weather?q=$location&appid=$APP_ID"
-    fun getForecastUrl(location: String) = "forecast?q=$location&appid=$APP_ID"
 }

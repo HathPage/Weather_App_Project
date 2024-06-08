@@ -32,8 +32,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/font"
                 android:textStyle="bold"
                 android:text="Hanoi" />
@@ -47,12 +47,14 @@
         </LinearLayout>
 
         <ImageButton
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:id="@+id/btn_menu"
+            android:layout_width="@dimen/_19sdp"
+            android:layout_height="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/location"
-            android:background="@drawable/notify_icon" />
+            android:background="@drawable/icon_menu" />
         <ImageView
             android:id="@+id/img_main"
             android:layout_width="@dimen/_130sdp"

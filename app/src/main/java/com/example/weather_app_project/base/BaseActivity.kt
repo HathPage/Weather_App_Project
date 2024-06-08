@@ -63,4 +63,17 @@ abstract class BaseActivity<VB: ViewBinding>: AppCompatActivity() {
             .replace(R.id.container_nextForecast, fragment)
             .commit()
     }
+    fun addFragment4(fragment: Fragment, fragmentTag: String, stack: String?) {
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.container_saved_today, fragment)
+            .commit()
+    }
+
+    fun replaceFragment4(fragment: Fragment, fragmentTag: String, stack: String?) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container_saved_today, fragment)
+            .commit()
+    }
 }

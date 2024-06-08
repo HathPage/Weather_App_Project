@@ -12,10 +12,10 @@ import kotlinx.coroutines.launch
 class FiveDaysViewModel(application: Application, private val fivesDaysRepository: FiveDaysRepository):
     AndroidViewModel(application) {
     val fiveDaysData = MutableLiveData<ApiResponse<FiveDays>>()
-    fun getFiveDays(){
+    fun getFiveDays(location: String){
         fiveDaysData.value = ApiResponse.Loading()
         viewModelScope.launch {
-            val response = fivesDaysRepository.getFiveDays()
+            val response = fivesDaysRepository.getFiveDays(location)
             fiveDaysData.value = response
         }
     }

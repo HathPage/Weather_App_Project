@@ -12,10 +12,10 @@ import kotlinx.coroutines.launch
 class TodayViewModel(application: Application, private val todayRepository: TodayRepository):
     AndroidViewModel(application) {
     val todayData = MutableLiveData<ApiResponse<TodayResponse>>()
-    fun getToday(){
+    fun getToday(location: String){
         todayData.value = ApiResponse.Loading()
         viewModelScope.launch {
-            val response = todayRepository.getToday()
+            val response = todayRepository.getToday(location)
             todayData.value = response
         }
     }

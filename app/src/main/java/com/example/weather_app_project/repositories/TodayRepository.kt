@@ -6,7 +6,7 @@ import com.example.weather_app_project.network.api.RetrofitClient
 import com.example.weather_app_project.objects.response.TodayResponse
 
 class TodayRepository: GenericApiResponse() {
-    suspend fun getToday(): ApiResponse<TodayResponse> {
-        return apiCall { RetrofitClient.getDummyApi.getToday() }
+    suspend fun getToday(location: String): ApiResponse<TodayResponse> {
+        return apiCall { RetrofitClient.getDummyApi.getToday(location) }
     }
 }

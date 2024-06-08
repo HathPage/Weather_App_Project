@@ -13,6 +13,7 @@ import com.example.weather_app_project.base.BaseFragment
 import com.example.weather_app_project.databinding.NextForecastFragmentBinding
 import com.example.weather_app_project.network.api.ApiResponse
 import com.example.weather_app_project.repositories.FiveDaysRepository
+import com.example.weather_app_project.ui.activities.MainActivity
 import com.example.weather_app_project.viewmodels.FiveDaysViewModel
 import com.example.weather_app_project.viewmodels.FiveDaysViewModelFactory
 
@@ -22,6 +23,9 @@ class NextForecastFragment : BaseFragment<NextForecastFragmentBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+    fun reloadData(location: String){
+        fiveDaysViewModel.getFiveDays(location)
+    }
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -30,7 +34,8 @@ class NextForecastFragment : BaseFragment<NextForecastFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
-        fiveDaysViewModel.getFiveDays()
+
+        fiveDaysViewModel.getFiveDays("Hanoi")
         fiveDaysViewModel.fiveDaysData.observe(viewLifecycleOwner){response->
             when(response){
                 is ApiResponse.Loading->{showLoadingDialog()}
@@ -53,8 +58,10 @@ class NextForecastFragment : BaseFragment<NextForecastFragmentBinding>() {
 
                 }
                 is ApiResponse.Fail->{hideLoadingDialog()}
+                else -> {}
             }
         }
+        (activity as? MainActivity)?.onFragmentReady()
     }
 
     private fun initViewModel() {

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="saved_location"
+            type="com.example.weather_app_project.objects.response.TodayResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_saved_today"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <RelativeLayout
+            android:id="@+id/rl_saved_today"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_180sdp"
+            android:background="@drawable/icon_saved"
+            android:layout_margin="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <TextView
+                android:id="@+id/tv_saved_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{String.valueOf(Math.round(saved_location.main.temp - 273.15)) + "°C"}'
+                android:textColor="@color/white"
+                android:textSize="@dimen/_45ssp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_35sdp"
+                />
+            <ImageView
+                android:id="@+id/img_main_saved_today"
+                android:layout_width="@dimen/_140sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:src="@drawable/moon_star_cloud"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@id/tv_saved_today"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:contentDescription="Weather" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{saved_location.weather.get(0).main}"
+                android:textColor="@color/white"
+                android:layout_below="@+id/tv_saved_today"
+                android:layout_marginStart="@dimen/_15sdp"
+                />
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{saved_location.name}"
+                android:textSize="@dimen/_18sdp"
+                android:textColor="@color/white"
+                android:layout_below="@+id/tv_description"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_26sdp"
+                />
+            <TextView
+                android:id="@+id/tv_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{saved_location.weather.get(0).description}"
+                android:textColor="#66FFFFFF"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/tv_location"
+                android:layout_marginEnd="@dimen/_25sdp"
+                />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

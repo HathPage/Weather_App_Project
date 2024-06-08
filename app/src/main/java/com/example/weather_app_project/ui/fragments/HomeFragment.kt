@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather_app_project.R
 //import com.example.weather_app_project.adapter.WeatherAdapter
 import com.example.weather_app_project.base.BaseFragment
@@ -17,12 +15,14 @@ import com.example.weather_app_project.viewmodels.TodayViewModel
 import com.example.weather_app_project.network.api.ApiResponse
 import com.example.weather_app_project.objects.response.TodayResponse
 import com.example.weather_app_project.repositories.TodayRepository
+import com.example.weather_app_project.ui.activities.MainActivity
 import com.example.weather_app_project.utils.ChangeIcon
 import com.example.weather_app_project.viewmodels.TodayViewModelFactory
 import kotlin.math.roundToInt
 
-class HomeFragment : BaseFragment<TodayFragmentBinding>() {
+class HomeFragment() : BaseFragment<TodayFragmentBinding>() {
     private lateinit var locationButton: View
+    private lateinit var menuButton: View
     private var listener: HomeMainInterface? = null
     private lateinit var todayViewModel: TodayViewModel
 
@@ -37,6 +37,9 @@ class HomeFragment : BaseFragment<TodayFragmentBinding>() {
             throw RuntimeException("$context must implement HomeMainInterface")
         }
     }
+    fun reloadData(location: String){
+        todayViewModel.getToday(location)
+    }
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -48,8 +51,10 @@ class HomeFragment : BaseFragment<TodayFragmentBinding>() {
 
         locationButton = view.findViewById(R.id.location)
         locationButton.setOnClickListener { listener?.onLocationButtonClick() }
+        menuButton = view.findViewById(R.id.btn_menu)
+        menuButton.setOnClickListener{ listener?.onMenuButtonClick() }
 
-        todayViewModel.getToday()
+        todayViewModel.getToday("Hà Nội")
         todayViewModel.todayData.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is ApiResponse.Loading -> {
@@ -80,6 +85,8 @@ class HomeFragment : BaseFragment<TodayFragmentBinding>() {
                 is ApiResponse.Fail -> {
                     hideLoadingDialog()
                 }
+
+                else -> {}
             }
         }
     }

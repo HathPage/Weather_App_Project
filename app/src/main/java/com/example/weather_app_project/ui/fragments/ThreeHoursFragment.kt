@@ -14,6 +14,7 @@ import com.example.weather_app_project.databinding.FiveMainItemFragmentBinding
 import com.example.weather_app_project.databinding.MainItemBinding
 import com.example.weather_app_project.network.api.ApiResponse
 import com.example.weather_app_project.repositories.FiveDaysRepository
+import com.example.weather_app_project.ui.activities.MainActivity
 import com.example.weather_app_project.utils.ChangeIcon
 import com.example.weather_app_project.viewmodels.FiveDaysViewModel
 import com.example.weather_app_project.viewmodels.FiveDaysViewModelFactory
@@ -24,6 +25,9 @@ class ThreeHoursFragment : BaseFragment<FiveMainItemFragmentBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+    fun reloadData(location: String){
+        fiveDaysViewModel.getFiveDays(location)
+    }
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -32,7 +36,8 @@ class ThreeHoursFragment : BaseFragment<FiveMainItemFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
-        fiveDaysViewModel.getFiveDays()
+
+        fiveDaysViewModel.getFiveDays("Hanoi")
         fiveDaysViewModel.fiveDaysData.observe(viewLifecycleOwner){response->
             when(response){
                 is ApiResponse.Loading->{showLoadingDialog()}
@@ -53,6 +58,7 @@ class ThreeHoursFragment : BaseFragment<FiveMainItemFragmentBinding>() {
 
                 }
                 is ApiResponse.Fail->{hideLoadingDialog()}
+                else -> {}
             }
         }
     }
