@@ -25,6 +25,8 @@ class SavedLocationAdapter(
             itemClickListener.onItemClick(mListData[position])
         }
         ChangeIcon.setWeatherIcon(holder.binding.root, textMain, R.id.img_main_saved_today)
+        ChangeIcon.setSavedBackgroundBasedOnTime(holder.binding.root, R.id.rl_saved_today)
+
     }
 
 }

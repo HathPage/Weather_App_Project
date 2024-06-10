@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,8 @@ import com.example.weather_app_project.network.api.ApiResponse
 import com.example.weather_app_project.objects.response.TodayResponse
 import com.example.weather_app_project.repositories.TodayRepository
 import com.example.weather_app_project.ui.activities.MainActivity
+import com.example.weather_app_project.ui.activities.SavedLocationActivity
+import com.example.weather_app_project.utils.ChangeIcon
 import com.example.weather_app_project.viewmodels.TodayViewModel
 import com.example.weather_app_project.viewmodels.TodayViewModelFactory
 
@@ -39,8 +42,8 @@ class SavedLocationFragment : BaseFragment<SavedTodayFragmentBinding>(), OnItemC
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
 
-        val locations = arrayOf("Ha Long", "Hanoi", "Tinh Hung Yen")
-        // Loop through the array and get weather data for each location
+        val locations = getLocationsFromPreferences()
+
         for (location in locations) {
             todayViewModel.getToday(location)
             todayViewModel.todayData.observe(viewLifecycleOwner) { response ->
@@ -80,16 +83,30 @@ class SavedLocationFragment : BaseFragment<SavedTodayFragmentBinding>(), OnItemC
         val todayViewModelFactory = TodayViewModelFactory(application!!,todayRepository)
         todayViewModel = ViewModelProvider(this, factory = todayViewModelFactory)[TodayViewModel::class.java]
     }
-
+    private fun getLocationsFromPreferences(): Set<String> {
+        val sharedPreferences = requireActivity().getSharedPreferences("weather_app_prefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getStringSet("locations", emptySet()) ?: emptySet()
+    }
     companion object {
         @JvmStatic
         fun newInstance() = SavedLocationFragment()
     }
 
     override fun onItemClick(todayResponse: TodayResponse) {
-        val intent = Intent(activity, MainActivity::class.java).apply {
-            putExtra("LOCATION_NAME", todayResponse.name)
+        if (SavedLocationActivity.status == -1) {
+            (activity as SavedLocationActivity).removeLocationFromPreferences(todayResponse.name)
+          //  Toast.makeText(activity, "Deleting location: ${todayResponse.name}", Toast.LENGTH_SHORT).show()
+        } else {
+            val intent = Intent(activity, MainActivity::class.java).apply {
+                putExtra("LOCATION_NAME", todayResponse.name)
+            }
+            startActivity(intent)
         }
-        startActivity(intent)
     }
+//    override fun onItemClick(todayResponse: TodayResponse) {
+//        val intent = Intent(activity, MainActivity::class.java).apply {
+//            putExtra("LOCATION_NAME", todayResponse.name)
+//        }
+//        startActivity(intent)
+//    }
 }

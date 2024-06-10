@@ -20,6 +20,18 @@ class ChangeIcon {
             }
             view.setBackgroundResource(backgroundRes)
         }
+        fun setSavedBackgroundBasedOnTime(view: View, iconViewId: Int) {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+//            val minute = calendar.get(Calendar.MINUTE)
+            val backgroundRes = if ((hour >= 18) || (hour <= 6)) {
+                R.drawable.bg_save_night
+            } else {
+                R.drawable.icon_saved
+            }
+            val bg: RelativeLayout = view.findViewById(iconViewId)
+            bg.setBackgroundResource(backgroundRes)
+        }
         fun setWeatherIcon(view: View, textMain: String?, iconViewId: Int){
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
