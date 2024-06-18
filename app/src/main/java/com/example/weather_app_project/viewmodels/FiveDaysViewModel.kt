@@ -19,4 +19,11 @@ class FiveDaysViewModel(application: Application, private val fivesDaysRepositor
             fiveDaysData.value = response
         }
     }
+    fun getUserFiveDays(lat: String, long: String){
+        fiveDaysData.value = ApiResponse.Loading()
+        viewModelScope.launch {
+            val response = fivesDaysRepository.getUserFiveDays(lat, long)
+            fiveDaysData.value = response
+        }
+    }
 }

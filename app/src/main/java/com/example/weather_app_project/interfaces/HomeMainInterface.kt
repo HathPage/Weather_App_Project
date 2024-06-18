@@ -5,4 +5,5 @@ interface HomeMainInterface {
     fun onCitySelected(city: String)
     fun onMenuButtonClick()
     fun onFragmentReady()
+    fun onLoadReady()
 }

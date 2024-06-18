@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.weather_app_project.R
 //import com.example.weather_app_project.adapter.WeatherAdapter
@@ -40,6 +41,9 @@ class HomeFragment() : BaseFragment<TodayFragmentBinding>() {
     fun reloadData(location: String){
         todayViewModel.getToday(location)
     }
+    fun reloadUserLocation(lat: String, long:String){
+        todayViewModel.getUserToday(lat, long)
+    }
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -54,7 +58,16 @@ class HomeFragment() : BaseFragment<TodayFragmentBinding>() {
         menuButton = view.findViewById(R.id.btn_menu)
         menuButton.setOnClickListener{ listener?.onMenuButtonClick() }
 
-        todayViewModel.getToday("Hà Nội")
+        todayViewModel.getToday("Ha Noi")
+//        val lat = arguments?.getString("lat")
+//        val long = arguments?.getString("long")
+//        if(lat != null && long != null && lat !="" && long != "" && MainActivity.locationStatus == 1){
+//            MainActivity.locationStatus = 2
+//            Toast.makeText(context, "lat: $lat, long: $long", Toast.LENGTH_SHORT).show()
+//            reloadUserLocation(lat, long)
+//        } else {
+//            reloadData("Ha Noi")
+//        }
         todayViewModel.todayData.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is ApiResponse.Loading -> {
@@ -88,6 +101,7 @@ class HomeFragment() : BaseFragment<TodayFragmentBinding>() {
 
                 else -> {}
             }
+
         }
     }
 

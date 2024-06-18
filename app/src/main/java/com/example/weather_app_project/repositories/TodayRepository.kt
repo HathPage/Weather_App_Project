@@ -9,4 +9,7 @@ class TodayRepository: GenericApiResponse() {
     suspend fun getToday(location: String): ApiResponse<TodayResponse> {
         return apiCall { RetrofitClient.getDummyApi.getToday(location) }
     }
+    suspend fun getUserToday(lat: String, long: String): ApiResponse<TodayResponse> {
+        return apiCall { RetrofitClient.getDummyApi.getUserToday(lat, long) }
+    }
 }

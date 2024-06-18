@@ -19,4 +19,11 @@ class TodayViewModel(application: Application, private val todayRepository: Toda
             todayData.value = response
         }
     }
+    fun getUserToday(lat: String, long: String){
+        todayData.value = ApiResponse.Loading()
+        viewModelScope.launch {
+            val response = todayRepository.getUserToday(lat, long)
+            todayData.value = response
+        }
+    }
 }

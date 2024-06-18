@@ -55,6 +55,7 @@ dependencies {
     //Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation("com.google.android.gms:play-services-location:18.0.0")
 
     //Networking
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")

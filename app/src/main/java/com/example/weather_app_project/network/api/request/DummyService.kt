@@ -20,4 +20,18 @@ interface DummyService {
         @Query("q") location: String,
         @Query("appid") appId: String = "6a8559e8dbeced0b31faf839c14b3c9d"
     ): Response<FiveDays>
+
+    @GET("forecast")
+    suspend fun getUserFiveDay(
+        @Query("lat") lat: String,
+        @Query("lon") long: String,
+        @Query("appid") appId: String = "6a8559e8dbeced0b31faf839c14b3c9d"
+    ): Response<FiveDays>
+
+    @GET("weather")
+    suspend fun getUserToday(
+        @Query("lat") lat: String,
+        @Query("lon") long: String,
+        @Query("appid") appId: String = "6a8559e8dbeced0b31faf839c14b3c9d"
+    ): Response<TodayResponse>
 }

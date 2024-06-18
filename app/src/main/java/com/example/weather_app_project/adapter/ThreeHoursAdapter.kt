@@ -15,6 +15,7 @@ class ThreeHoursAdapter: BaseRecyclerViewAdapter<ThreeHours, MainItemBinding>() 
     ) {
         holder.binding.threeHours = mListData[position]
         val textMain = mListData[position].weather[0].main
+        val day = mListData[position].weather[0].main
         ChangeIcon.setWeatherIcon(holder.binding.root, textMain, R.id.ig)
     }
 }

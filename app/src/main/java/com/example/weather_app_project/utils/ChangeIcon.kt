@@ -13,7 +13,7 @@ class ChangeIcon {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
 //            val minute = calendar.get(Calendar.MINUTE)
-            val backgroundRes = if ((hour >= 18) || (hour <= 6)) {
+            val backgroundRes = if ((hour >= 14) || (hour <= 6)) {
                 R.drawable.night_bg
             } else {
                 R.drawable.day_bg
@@ -24,7 +24,7 @@ class ChangeIcon {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
 //            val minute = calendar.get(Calendar.MINUTE)
-            val backgroundRes = if ((hour >= 18) || (hour <= 6)) {
+            val backgroundRes = if ((hour >= 14) || (hour <= 6)) {
                 R.drawable.bg_save_night
             } else {
                 R.drawable.icon_saved
@@ -36,7 +36,7 @@ class ChangeIcon {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
             val iconRes: Int
-            if ((hour >= 18) || (hour <= 6)) {
+            if ((hour >= 14) || (hour <= 6)) {
                  iconRes = when (textMain?.lowercase()) {
                      "clear" -> R.drawable.moon
                      "clouds" -> R.drawable.moon_star_cloud

@@ -1,6 +1,8 @@
 package com.example.weather_app_project.ui.activities
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -15,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import com.example.weather_app_project.R
 import com.example.weather_app_project.base.BaseActivity
@@ -26,6 +29,8 @@ import com.example.weather_app_project.ui.fragments.SavedLocationFragment
 import com.example.weather_app_project.ui.fragments.ThreeHoursFragment
 import com.example.weather_app_project.utils.ChangeDate
 import com.example.weather_app_project.utils.ChangeIcon
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import java.text.Normalizer
 import java.util.regex.Pattern
 
@@ -37,6 +42,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), HomeMainInterface {
     private var homeFragment = HomeFragment.newInstance()
     private var nextForecastFragment = NextForecastFragment.newInstance()
     private var threeHoursFragment = ThreeHoursFragment.newInstance()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var lat = ""
+    private var long = ""
 
     override fun inflateBinding(): ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
@@ -71,17 +79,46 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), HomeMainInterface {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
     })
-        addFragment(homeFragment,"home","")
+
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+//        if (ActivityCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_FINE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_COARSE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            ActivityCompat.requestPermissions(
+//                this,
+//                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+//                1
+//            )
+//            return
+//        }
+//        fusedLocationClient.lastLocation
+//            .addOnSuccessListener { location ->
+//                // Sử dụng vị trí
+//                lat = location?.latitude.toString()
+//                long = location?.longitude.toString()
+//                addFragment(homeFragment,"home", lat, long)
+//                addFragment2(threeHoursFragment,"5days", lat, long)
+//                addFragment3(nextForecastFragment,"nextForecast", lat, long)
+//            }
+
+        addFragment(homeFragment,"home", "", "")
+        addFragment2(threeHoursFragment,"5days", "", "")
+        addFragment3(nextForecastFragment,"nextForecast", "", "")
+
         ChangeDate.setDate(findViewById(R.id.root))
-        addFragment2(threeHoursFragment,"5days","")
         ChangeIcon.setBackgroundBasedOnTime(findViewById(R.id.root))
-        addFragment3(nextForecastFragment,"nextForecast","")
 
         exitButton = findViewById(R.id.btn_exit_search)
         exitButton.setOnClickListener {
             searchIsland.visibility = View.INVISIBLE
         }
     }
+
     override fun onCitySelected(city: String) {
         //val homeFragment = supportFragmentManager.findFragmentById(R.id.container) as HomeFragment
         homeFragment.reloadData(city)
@@ -89,6 +126,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), HomeMainInterface {
         nextForecastFragment.reloadData(city)
         //val threeHoursFragment = supportFragmentManager.findFragmentById(R.id.container5days) as ThreeHoursFragment
         threeHoursFragment.reloadData(city)
+    }
+    private fun onUserLocation(lat:String, long:String) {
+        homeFragment.reloadUserLocation(lat, long)
+        nextForecastFragment.reloadUserLocation(lat, long)
+        threeHoursFragment.reloadUserLocation(lat, long)
     }
 
     override fun onLocationButtonClick() {
@@ -103,5 +145,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), HomeMainInterface {
         locationName?.let {
             onCitySelected(locationName)
         }
+    }
+
+    override fun onLoadReady() {
+        onUserLocation(lat, long)
     }
 }

@@ -45,7 +45,11 @@ abstract class BaseActivity<VB: ViewBinding>: AppCompatActivity() {
         return pattern.matcher(temp).replaceAll("")
     }
 
-    fun addFragment(fragment: Fragment, fragmentTag: String, stack: String?) {
+    fun addFragment(fragment: Fragment, fragmentTag: String, stack: String?, stack2: String?) {
+        fragment.arguments = Bundle().apply {
+            putString("lat", stack)
+            putString("long", stack2)
+        }
         supportFragmentManager
             .beginTransaction()
             .add(R.id.container, fragment)
@@ -58,7 +62,11 @@ abstract class BaseActivity<VB: ViewBinding>: AppCompatActivity() {
             .replace(R.id.container, fragment)
             .commit()
     }
-    fun addFragment2(fragment: Fragment, fragmentTag: String, stack: String?) {
+    fun addFragment2(fragment: Fragment, fragmentTag: String, stack: String?, stack2: String?) {
+        fragment.arguments = Bundle().apply {
+            putString("lat", stack)
+            putString("long", stack2)
+        }
         supportFragmentManager
             .beginTransaction()
             .add(R.id.container5days, fragment)
@@ -71,7 +79,11 @@ abstract class BaseActivity<VB: ViewBinding>: AppCompatActivity() {
             .replace(R.id.container5days, fragment)
             .commit()
     }
-    fun addFragment3(fragment: Fragment, fragmentTag: String, stack: String?) {
+    fun addFragment3(fragment: Fragment, fragmentTag: String, stack: String?, stack2: String?) {
+        fragment.arguments = Bundle().apply {
+            putString("lat", stack)
+            putString("long", stack2)
+        }
         supportFragmentManager
             .beginTransaction()
             .add(R.id.container_nextForecast, fragment)

@@ -9,4 +9,7 @@ class FiveDaysRepository: GenericApiResponse() {
     suspend fun getFiveDays(location: String): ApiResponse<FiveDays> {
         return apiCall { RetrofitClient.getDummyApi.getFiveDay(location) }
     }
+    suspend fun getUserFiveDays(lat: String, long: String): ApiResponse<FiveDays> {
+        return apiCall { RetrofitClient.getDummyApi.getUserFiveDay(lat, long) }
+    }
 }

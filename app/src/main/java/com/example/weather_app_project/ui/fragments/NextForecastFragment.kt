@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,9 @@ class NextForecastFragment : BaseFragment<NextForecastFragmentBinding>() {
     fun reloadData(location: String){
         fiveDaysViewModel.getFiveDays(location)
     }
+    fun reloadUserLocation(lat: String, long:String){
+        fiveDaysViewModel.getUserFiveDays(lat, long)
+    }
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -35,7 +39,16 @@ class NextForecastFragment : BaseFragment<NextForecastFragmentBinding>() {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
 
-        fiveDaysViewModel.getFiveDays("Hanoi")
+//        val lat = arguments?.getString("lat")
+//        val long = arguments?.getString("long")
+//        if(lat != null && long != null && MainActivity.locationStatus == 1){
+//            MainActivity.locationStatus = 2
+//            Toast.makeText(context, "lat: $lat, long: $long", Toast.LENGTH_SHORT).show()
+//            reloadUserLocation(lat, long)
+//        } else {
+//            reloadData("Ha Noi")
+//        }
+        fiveDaysViewModel.getFiveDays("Ha Noi")
         fiveDaysViewModel.fiveDaysData.observe(viewLifecycleOwner){response->
             when(response){
                 is ApiResponse.Loading->{showLoadingDialog()}
